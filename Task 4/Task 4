@@ -1,0 +1,59 @@
+//Task 4:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2: Summation Button</title>
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+        #sumButton {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            border: 2px solid #5a5a5a;
+            background-color: #e0f7fa;
+            border-radius: 5px;
+            color: #00796b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <button id="sumButton">Click me</button>
+    <script>
+        // 1. Get a reference to the button.
+        const button = document.getElementById('sumButton');
+        // 2. Attach the click event listener.
+        button.addEventListener('click', function() {
+    // Function that generates and sum the numbers
+            calculateSum();
+        });
+
+        function calculateSum() {
+            // Array Creation and Looping ---
+            // Create an empty array
+            const numbers = [];
+            let sum = 0;
+// Loop from 0 up to and including 100 (101 iterations)
+            for (let i = 0; i <= 100; i++) {
+// Add the number to the array (Array creation)
+                numbers.push(i);
+// Add the current number to the sum (Looping/Summation)
+                sum += i;
+            }
+            //Printing the Result:
+            console.log("The generated array (0-100):", numbers);
+// Print the final sum
+            console.log("The sum of all numbers between 0 and 100 is:", sum);
+        }
+    </script>
+</body>
+</html>
