@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_5</title>
+    <style>
+/* Basic centering style */
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <button id="calcButton">Click me</button>
+    <script>
+  // Checks thet the script runs only after HTML elements are loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('calcButton');
+            if (button) {
+                button.addEventListener('click', function() {
+                    const allNumbers = [];
+                    const evenNumbers = [];
+                    let evenSum = 0;
+// Looping (0 to 100 "Included")
+                    for (let i = 0; i <= 100; i++) {
+                        allNumbers.push(i);
+// If statement (Filtering): Check if 'i' is even
+                        if (i % 2 === 0) {
+                            evenNumbers.push(i);
+                            evenSum += i;
+                        }
+                    }
+// Printing                 
+                    console.log("\"All numbers (0-100):\" // [object Array] (101)"); // Console 
+                    console.log(allNumbers); 
+                    console.log("\"Even numbers only:\" // [object Array] (51)"); 
+                    console.log(evenNumbers);
+// Final sum output
+                    console.log(`"The sum of only the even numbers (0, 2, 4, ..., 100) is:" ${evenSum}`);
+                });
+            } else {
+                console.error("Error: Button element not found.");
+            }
+        });
+    </script>
+</body>
+</html>
