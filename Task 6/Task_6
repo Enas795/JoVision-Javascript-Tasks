@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initia l-scale=1.0">
+    <title>Task_6</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        button {
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            color: black;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button id="btnA" style="background-color: #008000;">A. Remove Divisible by 3</button>
+        <button id="btnB" style="background-color: #009E00;">B. Add Range (100-150) to the pattern</button>
+        <button id="btnC" style="background-color: #00CC00;">C. Add 3 to Each Member</button>
+        <button id="btnD" style="background-color: #05FF05;">D. Print Index Slice (20 to 40)</button>
+        <button id="btnE" style="background-color: #65FF65;">E. Shuffle and Sort Descending</button>
+    </div>
+    <script>
+//Array Generation (0 to 100)
+        function generateBaseArray() {
+            const baseArray = [];
+            for (let i = 0; i <= 100; i++) {
+                baseArray.push(i);
+            }
+            return baseArray;
+        }
+//Hint Function: Array Shuffling
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+        }
+ document.addEventListener('DOMContentLoaded', function() {
+// A. Remove numbers divisible by 3 (using .filter())
+            document.getElementById('btnA').addEventListener('click', function() {
+                const initialArray = generateBaseArray();
+// Array Method: filter()
+                const filteredArray = initialArray.filter(num => num % 3 !== 0);
+                console.log("--- Operation A: Remove Divisible by 3 ---");
+                console.log(filteredArray);
+            });
+// B. Add numbers 100 to 150 (using .concat())
+            document.getElementById('btnB').addEventListener('click', function() {
+                const initialArray = generateBaseArray();
+                const newRange = [];
+                for (let i = 100; i <= 150; i++) {
+                    newRange.push(i);
+                }
+// Array Method: concat()
+                const combinedArray = initialArray.concat(newRange);
+                console.log("--- Operation B: Concatenate Range 100-150 ---");
+                console.log(combinedArray);
+            });
+// C. Add 3 to each member (using .map())
+            document.getElementById('btnC').addEventListener('click', function() {
+                const initialArray = generateBaseArray();
+// Array Method: map()
+                const mappedArray = initialArray.map(num => num + 3);
+                console.log("--- Operation C: Add 3 to Each Member ---");
+                console.log(mappedArray);
+            });
+// D. Print members from index 20 to 40 (using .slice())
+            document.getElementById('btnD').addEventListener('click', function() {
+                const initialArray = generateBaseArray();
+                const slicedArray = initialArray.slice(20, 41); 
+                console.log("--- Operation D: Print Index Slice (20 to 40) ---");
+                console.log(slicedArray);
+            });
+// E. Shuffle and then Sort Descending
+            document.getElementById('btnE').addEventListener('click', function() {
+                let arr = generateBaseArray(); 
+                console.log("--- Operation E: Shuffle and Sort Descending ---");
+// 1. Shuffle
+                shuffleArray(arr);
+                console.log("Shuffled Array:", arr);          
+// 2. Sort
+                arr.sort((a, b) => b - a);
+                console.log("Sorted Descending Array:", arr);
+            });
+        });
+    </script>
+</body>
+</html>
