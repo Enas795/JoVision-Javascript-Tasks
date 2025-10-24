@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #282c34;
+            color: #86E293;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #clock {
+            font-size: 4em;
+            font-weight: bold;
+            padding: 20px;
+            border: 3px solid #86E293;
+            border-radius: 10px;
+            background-color: #0C3211;
+            letter-spacing: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">--:--:--</div>
+
+    <script>
+// 1. Get a reference to the display element
+        const clockElement = document.getElementById('clock');
+// Function to format the time and update the display
+        function updateClock() {
+// Get the current Date object
+            const now = new Date();
+// Extract components
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+// Date Formatting: We use String.prototype.padStart() for clean formatting.
+            const formattedHours = String(hours).padStart(2, '0');
+            const formattedMinutes = String(minutes).padStart(2, '0');
+            const formattedSeconds = String(seconds).padStart(2, '0');
+// Construct the HH:MM:SS string
+            const timeString = `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+// Update the element
+            clockElement.textContent = timeString;
+        }
+// 2. Intervals: Call updateClock immediately to avoid the initial delay
+        updateClock(); 
+// 3. Intervals: Set up an interval to call updateClock every 1000 milliseconds (1 second), that helps in handling the time which is updated every second.
+        setInterval(updateClock, 1000); 
+    </script>
+</body>
+</html>
