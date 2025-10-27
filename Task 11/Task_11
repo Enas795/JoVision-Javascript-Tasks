@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_11</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            font-family: 'Verdana', sans-serif;
+        }
+        #getIpButton {
+            padding: 20px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #663300;
+            color: white;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        #getIpButton:hover {
+            background-color: #FF9D3B;
+            color: #4C2600;
+        }
+        #getIpButton:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <button id="getIpButton">Get IP</button>
+    <script>
+        const button = document.getElementById('getIpButton');
+        const API_URL = "https://api.ipify.org/";
+ document.addEventListener('DOMContentLoaded', function() {
+            button.addEventListener('click', function() {              
+// State update 1: loading state
+                button.textContent = "Requesting...";
+                button.disabled = true; 
+// Javascript: Fetching API
+                fetch(API_URL)
+                    .then(response => {
+// Check for errors (such as 404 or 500 status codes)
+                        if (!response.ok) {
+// Throw an error to jump to the .catch block
+                            throw new Error(`Network response was not successful: ${response.statusText} (${response.status})`);
+                        }
+// ipify returns plain text IP address
+                        return response.text(); 
+                    })
+                    .then(ipAddress => {
+// DOM Manipulation: Update button text
+                        button.textContent = ipAddress;
+                        console.log("IP successfully retrieved:", ipAddress);
+                    })
+                    .catch(error => {
+// Javascript: Error Handling & Window Popups
+                        console.error("Fetch Error:", error);
+                        
+// Display the error message in a window alert
+                        window.alert(`Error fetching IP: \n\n${error.message}`);
+
+// Revert button text on error
+                        button.textContent = "Get IP (Error)";
+                    })
+                    .finally(() => {
+// Re-enable button
+                        button.disabled = false;
+                    });
+            });
+        });
+    </script>
+
+</body>
+</html>
