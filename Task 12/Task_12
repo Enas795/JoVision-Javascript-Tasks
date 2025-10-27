@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_12</title>
+    <style>
+        body {
+            font-family: Clarendon, slab-serif;
+            padding: 20px;
+        }
+        div {
+            margin-bottom: 10px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            border: 1px solid #777777;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #333333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #C0C0C0;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Information</h1>
+    <div>
+        <label for="nameInput">Name</label>
+        <input type="text" id="nameInput" placeholder="Name">
+    </div>
+    <div>
+        <label for="ageInput">Age</label>
+        <input type="text" id="ageInput" placeholder="Age">
+    </div>
+    <button onclick="submitData()">Submit</button>
+    <script>
+        function submitData() {
+// 1. Get the values from the text fields
+            const name = document.getElementById('nameInput').value;
+            const age = document.getElementById('ageInput').value;
+// Basic validation: prevent execution if fields are empty
+            if (!name || !age) {
+                alert("Please enter both Name and Age.");
+                return;
+            }
+// 2. Create the data object
+            const userData = {
+                "name": name,
+                "age": age,
+                "timestamp": new 
+// Get current date and time              
+Date().toLocaleString() 
+            };
+// 4. Object deconstruction
+            const { name: userName, age: userAge, timestamp: submitTime } = userData;
+// 5. Create the message for the window popup (Alert box)
+            const popupMessage = `
+                Your name is: ${userName}
+                Your age is: ${userAge}
+                Timestamp: ${submitTime}
+            `;
+// 6. Display the window popup
+            alert(popupMessage);
+        }
+    </script>
+</body>
+</html>
