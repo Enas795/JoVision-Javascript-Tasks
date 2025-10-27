@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_9</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        #getIpButton {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #000099;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s;
+        }
+        #getIpButton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button id="getIpButton">Get IP</button>
+    <script>
+        const button = document.getElementById('getIpButton');
+        const API_URL = "https://api.ipify.org/";
+ document.addEventListener('DOMContentLoaded', function() {           
+            button.addEventListener('click', function() {      
+                console.log("Requesting IP address...");
+// Javascript: Requests (Fetch API)
+                fetch(API_URL)
+                    .then(response => {
+// We use .text() so ipify returns a plain text response, not JSON.
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(ipAddress => {
+// Print the response (the IP address string) to the console
+                        console.log("✅ Your Public IP Address is:", ipAddress);
+                    })
+                    .catch(error => {
+// Handling any errors during the request
+                        console.error("❌ Failed to fetch IP address:", error);
+                    });
+
+            });
+        });
+    </script>
+</body>
+</html>

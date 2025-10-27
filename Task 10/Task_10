@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_10</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #e8f5e9;
+            font-family: Arial, sans-serif;
+        }
+        #getIpButton {
+            padding: 20px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background-color: #000099;
+            color: white;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        #getIpButton:hover {
+            background-color: #0099CC;
+            color: #000066;
+        }
+        #getIpButton:active {
+            transform: translateY(2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <button id="getIpButton">Get IP</button>
+    <script>
+        const button = document.getElementById('getIpButton');
+        const API_URL = "https://api.ipify.org/";
+        document.addEventListener('DOMContentLoaded', function() {
+            button.addEventListener('click', function() {
+// 1. Change the button text temporarily to show the loading state
+                button.textContent = "Fetching...";
+                button.disabled = true; // disabling the button during fetching
+// 2. Javascript: Requests (Fetch API)
+                fetch(API_URL)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+// ipify returns plain text
+                        return response.text(); 
+                    })
+                    .then(ipAddress => {
+// 3. DOM Manipulation: Replacing button text with the IP address
+                        button.textContent = ipAddress;
+                        console.log("Button text replaced with IP:", ipAddress);
+                    })
+                    .catch(error => {
+// Handling the errors and revert button text
+                        button.textContent = "Error: Click to Retry";
+                        console.error("❌ Failed to fetch IP address:", error);
+                    })
+                    .finally(() => {
+// Re-enable the button regardless of success or failure
+                        button.disabled = false;
+                    });
+            });
+        });
+    </script>
+</body>
+</html>
