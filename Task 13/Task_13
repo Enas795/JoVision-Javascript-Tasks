@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task_13</title>
+    <style>
+        body {
+            font-family: Clarendon, slab-serif;
+            padding: 20px;
+        }
+        div {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #777777;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #333333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #C0C0C0;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<h1>Estimate the Age of a Name</h1>
+    <div>
+        <label for="nameInput">Name</label>
+        <input type="text" id="nameInput" placeholder="Name">
+    </div>
+    <button onclick="getPredictedAge()">Submit</button>
+    <script>
+        async function getPredictedAge() {
+// 1. Get the name from the input field
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) {
+                alert("Please enter a name before submitting.");
+                return;
+            }
+// 2. Construct the API URL with the required query parameter
+            const API_URL = `https://api.agify.io/?name=${encodeURIComponent(name)}`;
+            try {
+// 3. Make the API request
+//    'await' pauses execution until the response object is received.
+                const response = await fetch(API_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+// 4. Parse the JSON body
+//    'await' pauses execution until the data is parsed into a JS object.
+                const data = await response.json();
+// 5. Object Deconstruction: Extract 'name' and 'age' from the response object
+                const { name: receivedName, age } = data;
+// 6. Create the message using the extracted variables
+                const popupMessage = `
+                    Your name is: ${receivedName}
+                    Your age is: ${age}
+                    (Age is an estimate from agify.io)
+                `;
+// 7. Display the window popup
+                alert(popupMessage);
+
+            } catch (error) {
+// Handle network or parsing errors
+                console.error("Failed to fetch age data:", error);
+                alert(`Error: Could not retrieve age for "${name}". Check console for details.`);
+            }
+        }
+    </script>
+</body>
+</html>
